@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="360dp"
+    android:viewportWidth="360"
+    android:viewportHeight="360">
+
+    <!-- Background shape with concave (inward) top -->
+    <path
+        android:pathData="M0,0 C90,80 270,80 360,0 L360,360 L0,360 Z">
+
+        <!-- Gradient fill -->
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startY="0"
+                android:endY="360"
+                android:type="linear"
+                android:startColor="#FFE48831"
+            android:endColor="#4DE48831"
+            />
+        </aapt:attr>
+    </path>
+</vector>

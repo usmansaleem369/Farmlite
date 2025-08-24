@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="@dimen/_20sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_dialog_bg"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/ivNotifyingImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/success_image"/>
+
+    <TextView
+        android:id="@+id/tvCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/verification_complete"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp"
+        android:fontFamily="@font/manrope_extrabold"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/verification_success"
+        android:textColor="@color/black_with_opacity"
+        android:textSize="@dimen/_12ssp"
+        android:gravity="center"
+        android:fontFamily="@font/manrope_regular" />
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Confirm"
+        android:backgroundTint="@color/text_color_orange"
+        android:textColor="@android:color/white"
+        app:cornerRadius="@dimen/_10sdp"/>
+
+</LinearLayout>

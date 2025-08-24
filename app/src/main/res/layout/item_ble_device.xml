@@ -1,0 +1,91 @@
+<!-- item_ble_device.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:background="@color/white"
+    app:cardCornerRadius="@dimen/_15sdp"
+    app:cardBackgroundColor="@color/card_bg_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/door_placeholder" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDeviceId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/device_id"
+                android:textColor="@color/dark_text_color"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAutoChicken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/textview_rounded_bg"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/auto_chicken_door_lock"
+                android:textColor="@color/border_color"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="@id/tvDeviceId"
+                app:layout_constraintTop_toBottomOf="@id/tvDeviceId" />
+
+            <TextView
+                android:id="@+id/tvDeviceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@drawable/textview_filled_offline_rounded_bg"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/offline"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tvAutoChicken"
+                app:layout_constraintStart_toEndOf="@id/tvAutoChicken"
+                app:layout_constraintTop_toTopOf="@id/tvAutoChicken" />
+
+            <TextView
+                android:id="@+id/tvDeviceInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/device_info"
+                android:textColor="@color/light_text_color"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="@id/tvAutoChicken"
+                app:layout_constraintTop_toBottomOf="@id/tvAutoChicken" />
+            <TextView
+                android:id="@+id/tvDeviceAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/device_address"
+                android:textColor="@color/light_text_color"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintStart_toStartOf="@id/tvDeviceInfo"
+                app:layout_constraintTop_toBottomOf="@id/tvDeviceInfo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

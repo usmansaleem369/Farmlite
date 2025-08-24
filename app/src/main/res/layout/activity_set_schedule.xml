@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".ui.SetScheduleActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:src="@drawable/ic_back_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/device"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivBackBtn" />
+
+        <RelativeLayout
+            android:id="@+id/rlDeviceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/card_bg_color"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/ivBackBtn">
+
+            <TextView
+                android:id="@+id/tvDeviceId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/device_id"
+                android:textColor="@color/dark_text_color"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/tvDeviceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@drawable/textview_filled_online_rounded_bg"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/online"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvAutoChicken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/auto_chicken_door_lock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlDeviceInfo" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:rowCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAutoChicken">
+
+            <TextView
+                android:id="@+id/itemTT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/_70sdp"
+                android:minHeight="@dimen/_70sdp"
+                android:layout_rowSpan="1"
+                android:layout_columnSpan="1"
+                android:layout_gravity="center"
+                android:textColor="@color/dark_text_color"
+                android:layout_margin="@dimen/_10ssp"
+                android:background="@drawable/grid_item_bg_unselected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/t_t"
+                android:textSize="@dimen/_18ssp" />
+
+            <TextView
+                android:id="@+id/itemTL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowSpan="1"
+                android:layout_columnSpan="1"
+                android:minWidth="@dimen/_70sdp"
+                android:minHeight="@dimen/_70sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/dark_text_color"
+                android:layout_margin="@dimen/_10ssp"
+                android:background="@drawable/grid_item_bg_unselected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/t_l"
+                android:textSize="@dimen/_18ssp"/>
+
+            <TextView
+                android:id="@+id/itemLT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowSpan="1"
+                android:layout_columnSpan="1"
+                android:minWidth="@dimen/_70sdp"
+                android:minHeight="@dimen/_70sdp"
+                android:textColor="@color/dark_text_color"
+                android:layout_margin="@dimen/_10ssp"
+                android:background="@drawable/grid_item_bg_unselected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/l_t"
+                android:textSize="@dimen/_18ssp" />
+            <TextView
+                android:id="@+id/itemLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowSpan="1"
+                android:layout_columnSpan="1"
+                android:minWidth="@dimen/_70sdp"
+                android:minHeight="@dimen/_70sdp"
+                android:textColor="@color/dark_text_color"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_10ssp"
+                android:background="@drawable/grid_item_bg_unselected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/l_l"
+                android:textSize="@dimen/_18ssp" />
+
+        </GridLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

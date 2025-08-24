@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green_color_theme">#245537</color>
+    <color name="hint_color">#66000000</color>
+    <color name="fb_btn_bg_color">#0551A4</color>
+    <color name="google_btn_bg_color">#C68F36</color>
+    <color name="card_bg_color">#F2F3F7</color>
+    <color name="dark_text_color">#222222</color>
+    <color name="light_text_color">#666666</color>
+    <color name="border_color">#93A3B3</color>
+    <color name="black_with_opacity">#6D6D6D</color>
+    <color name="main_bg_color">#F2F3F7</color>
+    <color name="text_color_orange">#E48831</color>
+    <color name="text_color_white">#FFFFFE</color>
+</resources>
