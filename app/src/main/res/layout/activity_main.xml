@@ -1,56 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_corners_bg"
+    app:layoutDescription="@xml/motion_scene">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <ScrollView
+        android:id="@+id/sideMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:background="@color/white"
-        tools:context=".ui.MainActivity">
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/devices"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <ImageView
-                android:id="@+id/btnAddDevices"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvBluetooth"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                tools:listitem="@layout/item_ble_device"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:background="@color/text_color_orange"
+        android:clipToPadding="false">
 
         <include
-            android:id="@+id/drawer_items"
-            layout="@layout/drawer_layout" />
-    </com.google.android.material.navigation.NavigationView>
+            android:id="@+id/sideMenuContent"
+            layout="@layout/side_menu_content" />
+    </ScrollView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="8dp"
+        app:strokeColor="@android:color/transparent"
+        app:cardBackgroundColor="@android:color/white">
 
-</androidx.drawerlayout.widget.DrawerLayout>
+        <include
+            android:id="@+id/homeContent"
+            layout="@layout/home_content" />
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

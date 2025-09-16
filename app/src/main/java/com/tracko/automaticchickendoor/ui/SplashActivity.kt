@@ -61,8 +61,8 @@ class SplashActivity : AppCompatActivity() {
                     navigateToActivity(OnBoardingActivity::class.java)
                 
                 sharedPreferencesHelper.isUserLogin ->
-                    navigateToActivity(SignInActivity::class.java)
-                    //navigateToActivity(MainActivity::class.java)
+                   // navigateToActivity(SignInActivity::class.java)
+                    navigateToActivity(MainActivity::class.java)
                 
                 else ->
                     navigateToActivity(SignInActivity::class.java)

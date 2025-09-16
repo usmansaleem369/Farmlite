@@ -2,6 +2,7 @@ package com.tracko.automaticchickendoor.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,15 +37,9 @@ class MainActivity : AppCompatActivity() {
             FarmLiteUtil.requestBluetoothPermissions(this)
         }
         //Not in initUiAndListeners function to match functionality
-        binding.drawerItems.llLogout.setOnClickListener {
-            signOut()
-        }
-        binding.drawerItems.llConnectToFarmliteDoor.setOnClickListener {
-            val intent = Intent(this, ScanBLEActivity::class.java)
-            startActivity(intent)
-        }
+     
         
-        sharedPreferencesHelper.chickenDoorDevices?.let {
+       /* sharedPreferencesHelper.chickenDoorDevices?.let {
             binding.rvBluetooth.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = DevicesListAdapter(it) { device ->
@@ -54,14 +49,64 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-        }
+        }*/
     }
     
     private fun initUiAndListeners() {
-        binding.btnAddDevices.setOnClickListener {
-            val intent = Intent(this, ScanBLEActivity::class.java)
-            startActivity(intent)
+        binding.homeContent.ivProfile.setOnClickListener {
+            Log.e("Button","Clicked")
+            if (binding.motionLayout.progress == 0f) {
+                binding.motionLayout.transitionToEnd()   // open menu
+            } else {
+                binding.motionLayout.transitionToStart() // close menu
+            }
         }
+        
+        binding.mainContent.setOnClickListener {
+        
+        }
+        
+        binding.sideMenuContent.apply {
+            btnEditProfile.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnChangePassword.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Change Password clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnNotificationSettings.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Notification Settings clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnContactSupport.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Contact Support clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnDeleteAccount.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Delete Account clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnPrivacyPolicy.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Privacy & Policy clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnTermsConditions.setOnClickListener {
+                Toast.makeText(this@MainActivity, "Terms & Conditions clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnAppSettings.setOnClickListener {
+                Toast.makeText(this@MainActivity, "App Settings clicked", Toast.LENGTH_SHORT).show()
+            }
+            
+            btnLogout.setOnClickListener {
+                signOut()
+                Toast.makeText(this@MainActivity, "Logged out", Toast.LENGTH_SHORT).show()
+            }
+        }
+        
+        
+        
     }
     
     override fun onRequestPermissionsResult(

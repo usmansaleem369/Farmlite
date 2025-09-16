@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_40sdp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profileContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/light_card_bg"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:contentPadding="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/profile_placeholder" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivNotification"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignTop="@id/ivProfile"
+                android:layout_alignBottom="@id/ivProfile"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_notification_rounded_inactive" />
+
+            <TextView
+                android:id="@+id/tvHelloUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivProfile"
+                android:fontFamily="@font/manrope_bold"
+                android:text="Hello, Usman!!"
+                android:textSize="@dimen/_16ssp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tvHelloUser"
+                android:layout_alignBottom="@id/tvHelloUser"
+                android:layout_toEndOf="@id/tvHelloUser"
+                android:src="@drawable/hi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHelloUser"
+                android:text="@string/let_s_manage_your_devices"
+                android:textColor="#180525"
+                android:textSize="@dimen/_10ssp" />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/headerSliderContent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/profileContent"
+        app:strokeColor="@android:color/transparent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_home_img" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvConnectToFarmlite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/text_color_orange"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/headerSliderContent"
+        app:strokeColor="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="start|center"
+            android:padding="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/ivConnect"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_connect_to_farmlite" />
+            <TextView
+                android:id="@+id/tvTitleCtF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14ssp"
+                android:text="@string/connect_farmlite_device"
+                android:fontFamily="@font/manrope_semibold"
+                app:layout_constraintStart_toEndOf="@id/ivConnect"
+                app:layout_constraintTop_toTopOf="@id/ivConnect"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/text_color_white"/>
+
+            <TextView
+                android:id="@+id/tvSubTitleCtF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_11ssp"
+                android:text="@string/pair_your_farmlite_device"
+                android:fontFamily="@font/manrope_semibold"
+                app:layout_constraintStart_toStartOf="@id/tvTitleCtF"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleCtF"
+                android:textColor="@color/text_color_white"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvCheckProgramming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        app:cardBackgroundColor="#2EDAA97B"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/cvConnectToFarmlite"
+        app:strokeColor="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="start|center"
+            android:padding="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/ivCheckProgramming"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_centerVertical="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_check_programming" />
+            <TextView
+                android:id="@+id/tvTitleCP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14ssp"
+                android:text="@string/check_programming"
+                android:fontFamily="@font/manrope_semibold"
+                app:layout_constraintStart_toEndOf="@id/ivCheckProgramming"
+                app:layout_constraintTop_toTopOf="@id/ivCheckProgramming"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvSubTitleCP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_11ssp"
+                android:text="@string/view_connected_devices"
+                android:fontFamily="@font/manrope_semibold"
+                app:layout_constraintStart_toStartOf="@id/tvTitleCP"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleCP"
+                android:textColor="#656361"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

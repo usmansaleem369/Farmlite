@@ -14,4 +14,5 @@
     <color name="main_bg_color">#F2F3F7</color>
     <color name="text_color_orange">#E48831</color>
     <color name="text_color_white">#FFFFFE</color>
+    <color name="light_card_bg">#FAFAFA</color>
 </resources>

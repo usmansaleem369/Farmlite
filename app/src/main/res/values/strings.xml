@@ -76,4 +76,16 @@
     <string name="verification_success">Your account has been successfully\nverified.</string>
     <string name="verification_complete">Verification Complete!</string>
     <string name="invalid_code">Invalid Code</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="contact_support">Contact Support</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="privacy_amp_policy"><![CDATA[Privacy & Policy]]></string>
+    <string name="app_settings">App Settings</string>
+    <string name="let_s_manage_your_devices">Let’s manage your devices!</string>
+    <string name="connect_farmlite_device">Connect FarmLite Device</string>
+    <string name="pair_your_farmlite_device">Pair Your FarmLite Device</string>
+    <string name="check_programming">Check Programming</string>
+    <string name="view_connected_devices">View Connected Devices</string>
 </resources>
