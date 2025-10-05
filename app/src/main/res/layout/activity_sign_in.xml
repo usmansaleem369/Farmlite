@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     tools:context=".ui.SignInActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,25 +19,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/manrope_extrabold"
             android:text="@string/app_name"
             android:textColor="@color/text_color_orange"
             android:textSize="@dimen/_30ssp"
             android:textStyle="bold"
-            android:fontFamily="@font/manrope_extrabold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/manrope_extrabold"
             android:text="@string/welcome_back"
             android:textColor="@color/black"
             android:textSize="@dimen/_20ssp"
-            android:fontFamily="@font/manrope_extrabold"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,33 +66,33 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="#E7E7E7"
             android:layout_marginTop="@dimen/_2sdp"
-            app:layout_constraintStart_toStartOf="@id/tilEmail"
+            android:background="#E7E7E7"
+            app:layout_constraintBottom_toBottomOf="@id/tvOr"
             app:layout_constraintEnd_toStartOf="@id/tvOr"
-            app:layout_constraintTop_toTopOf="@id/tvOr"
-            app:layout_constraintBottom_toBottomOf="@id/tvOr" />
+            app:layout_constraintStart_toStartOf="@id/tilEmail"
+            app:layout_constraintTop_toTopOf="@id/tvOr" />
 
         <TextView
             android:id="@+id/tvOr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/or"
             android:padding="@dimen/_5sdp"
+            android:text="@string/or"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/btnGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/btnGoogle" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="#E7E7E7"
             android:layout_marginTop="@dimen/_2sdp"
+            android:background="#E7E7E7"
+            app:layout_constraintBottom_toBottomOf="@id/tvOr"
             app:layout_constraintEnd_toEndOf="@id/tilEmail"
             app:layout_constraintStart_toEndOf="@id/tvOr"
-            app:layout_constraintTop_toTopOf="@id/tvOr"
-            app:layout_constraintBottom_toBottomOf="@id/tvOr"/>
+            app:layout_constraintTop_toTopOf="@id/tvOr" />
 
         <TextView
             android:id="@+id/tvTitleEmail"
@@ -105,7 +105,6 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOr" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEmail"
@@ -177,7 +176,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <TextView
             android:id="@+id/tvForgotPassword"
             android:layout_width="wrap_content"
@@ -190,58 +188,67 @@
             app:layout_constraintEnd_toEndOf="@id/tilPassword"
             app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:backgroundTint="@color/text_color_orange"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
-            app:cornerRadius="@dimen/_5sdp"
-            app:layout_constraintBottom_toTopOf="@id/llForgotPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tilPassword"
+            app:layout_constraintEnd_toEndOf="@id/tilPassword"
+            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword">
 
-        <LinearLayout
-            android:id="@+id/llForgotPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_60sdp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
+            <CheckBox
+                android:id="@+id/cbRememberMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/don_t_have_an_account_yet"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp" />
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:padding="8dp"
+                android:text="@string/remember_me"
+                android:textSize="@dimen/_12ssp"
+                app:buttonTint="@color/text_color_orange"
+                app:layout_constraintBottom_toTopOf="@id/btnLogin"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tvSignUp"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:textColor="@color/text_color_orange"
-                android:textSize="@dimen/_12ssp" />
-        </LinearLayout>
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:backgroundTint="@color/text_color_orange"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_5sdp"
+                app:layout_constraintBottom_toTopOf="@id/llForgotPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <CheckBox
-            android:id="@+id/cbRememberMe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/remember_me"
-            android:textSize="@dimen/_12ssp"
-            app:buttonTint="@color/text_color_orange"
-            app:layout_constraintBottom_toTopOf="@id/btnLogin"
-            app:layout_constraintStart_toStartOf="@id/btnLogin" />
+            <LinearLayout
+                android:id="@+id/llForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/don_t_have_an_account_yet"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:textColor="@color/text_color_orange"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
