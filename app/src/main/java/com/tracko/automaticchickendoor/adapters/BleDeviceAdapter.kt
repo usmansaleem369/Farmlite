@@ -25,14 +25,8 @@ class BleDeviceAdapter(
         val device = devices[position]
 
         holder.binding.apply {
-            tvDeviceId.text = device.name ?: "Unknown Device"
-            tvDeviceAddress.text = device.address
-            tvDeviceStatus.text = "Online"
-            tvDeviceStatus.background = ResourcesCompat.getDrawable(
-                holder.itemView.context.resources,
-                R.drawable.textview_filled_online_rounded_bg,
-                null
-            )
+            tvBleDeviceName.text = device.name ?: "Unknown Device"
+            tvBleDeviceStatus.text = if (device.bondState == BluetoothDevice.BOND_BONDED) "Connected" else "Not Connected"
         }
 
         holder.itemView.setOnClickListener {

@@ -88,4 +88,11 @@
     <string name="pair_your_farmlite_device">Pair Your FarmLite Device</string>
     <string name="check_programming">Check Programming</string>
     <string name="view_connected_devices">View Connected Devices</string>
+    <string name="near_by_devices">Near by Devices</string>
+    <string name="searching_for_nearby_devices">Searching for\nNearby Devices...</string>
+    <string name="connect_via_bluetooth">Connect Via Bluetooth</string>
+    <string name="make_sure_your_farmlite_device_is_npowered_on_and_nearby_to_connect">Make sure your FarmLite device is\npowered on and nearby to connect</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="via_bluetooth">via Bluetooth.</string>
+    <string name="nearby_devices">Nearby Devices</string>
 </resources>

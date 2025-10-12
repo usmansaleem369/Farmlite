@@ -5,37 +5,129 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_10sdp"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingTop="@dimen/_30sdp"
     tools:context=".ui.ScanBLEActivity">
+
+    <ImageView
+        android:id="@+id/ivBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         app:layout_constraintTop_toTopOf="@id/ivBackBtn"
+         app:layout_constraintBottom_toBottomOf="@id/ivBackBtn"
+         android:text="@string/near_by_devices"
+         android:gravity="center"
+         android:textSize="@dimen/_14ssp"
+         android:fontFamily="@font/manrope_semibold"
+         android:textColor="@color/text_color_black"/>
+
+    <TextView
+        android:id="@+id/tvInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ivBackBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/searching_for_nearby_devices"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="#090909"
+        android:textSize="@dimen/_18ssp"/>
+
+         <LinearLayout
+             android:id="@+id/llBleConfig"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginVertical="@dimen/_5sdp"
+             android:layout_marginHorizontal="@dimen/_10sdp"
+             android:background="@drawable/ble_rounded_bg"
+             android:padding="@dimen/_10sdp"
+             android:orientation="vertical"
+             app:layout_constraintTop_toBottomOf="@id/tvInformation">
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_bluetooth"
+                 android:layout_gravity="center_horizontal"/>
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/connect_via_bluetooth"
+                  android:fontFamily="@font/manrope_bold"
+                  android:layout_marginVertical="@dimen/_2sdp"
+                  android:textColor="@color/black"
+                  android:gravity="center"
+                  android:textSize="@dimen/_12ssp"/>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/make_sure_your_farmlite_device_is_npowered_on_and_nearby_to_connect"
+                 android:fontFamily="@font/manrope_medium"
+                 android:layout_marginVertical="@dimen/_2sdp"
+                 android:gravity="center"
+                 android:textColor="#180525"
+                 android:textSize="@dimen/_10ssp"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/via_bluetooth"
+                 android:fontFamily="@font/manrope_medium"
+                 android:layout_marginVertical="@dimen/_2sdp"
+                 android:gravity="center"
+                 android:textColor="@color/text_color_orange"
+                 android:textSize="@dimen/_10ssp"/>
+
+             <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/bluetooth"
+                     android:id="@+id/title"
+                     android:layout_centerVertical="true"
+                     android:textSize="@dimen/_12ssp"
+                     android:textColor="@color/black"
+                     android:fontFamily="@font/manrope_semibold" />
+                 <androidx.appcompat.widget.SwitchCompat
+                     android:id="@+id/switchBluetooth"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_toEndOf="@id/title"
+                     app:trackTint="@color/text_color_orange"
+                     app:thumbTint="@color/white"
+                     android:layout_alignParentEnd="true"/>
+             </RelativeLayout>
+
+         </LinearLayout>
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/devices"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llBleConfig"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/_20sdp"
-       app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="scaning.json"
-        app:lottie_loop="true" />
+        android:text="@string/nearby_devices"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBluetooth"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        tools:listitem="@layout/item_ble_device" />
+        android:layout_height="wrap_content"
+        android:id="@+id/rvBleDevices"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

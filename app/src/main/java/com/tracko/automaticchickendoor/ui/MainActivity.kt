@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.core.Amplify
+import com.amplifyframework.datastore.generated.model.Device
 import com.tracko.automaticchickendoor.R
 import com.tracko.automaticchickendoor.adapters.DevicesListAdapter
 import com.tracko.automaticchickendoor.databinding.ActivityMainBinding
@@ -29,16 +31,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        if (FarmLiteUtil.hasBluetoothPermissions(this)) {
-            FarmLiteUtil.checkAndEnableBluetooth(this)
-            initUiAndListeners()
-        } else {
-            FarmLiteUtil.requestBluetoothPermissions(this)
-        }
-        //Not in initUiAndListeners function to match functionality
      
-        
+        initUiAndListeners()
+        //Not in initUiAndListeners function to match functionality
+       getDevicesByEmail("usman.saleem369@gmail.com")
        /* sharedPreferencesHelper.chickenDoorDevices?.let {
             binding.rvBluetooth.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
@@ -50,6 +46,32 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }*/
+    }
+    
+    fun getDevicesByEmail(email: String) {
+        Amplify.DataStore.query(
+            Device::class.java,
+            Device.EMAIL.eq(email),
+            { matches ->
+                val deviceList = mutableListOf<Device>()
+                while (matches.hasNext()) {
+                    val device = matches.next()
+                    deviceList.add(device)
+                    Log.i("Amplify", "Device found: ${device.deviceName} (${device.macAddress})")
+                }
+                
+                if (deviceList.isEmpty()) {
+                    Log.i("Amplify", "No devices found for email: $email")
+                } else {
+                    Log.i("Amplify", "Found ${deviceList.size} devices for $email")
+                }
+                
+                // You can now post deviceList to LiveData, RecyclerView, etc.
+            },
+            { error ->
+                Log.e("Amplify", "Query failed", error)
+            }
+        )
     }
     
     private fun initUiAndListeners() {
@@ -64,6 +86,11 @@ class MainActivity : AppCompatActivity() {
         
         binding.mainContent.setOnClickListener {
         
+        }
+        
+        binding.homeContent.cvConnectToFarmlite.setOnClickListener {
+            val intent = Intent(this,ScanBLEActivity::class.java)
+            startActivity(intent)
         }
         
         binding.sideMenuContent.apply {
