@@ -1,5 +1,6 @@
 package com.tracko.automaticchickendoor.ui
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -16,9 +17,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.tracko.automaticchickendoor.R
 import com.tracko.automaticchickendoor.adapters.BleDeviceAdapter
 import com.tracko.automaticchickendoor.databinding.ActivityScanBleactivityBinding
-import com.tracko.automaticchickendoor.databinding.WifiCredentialsPopupBinding
+import com.tracko.automaticchickendoor.databinding.DeviceConnectionSuccessDialogBinding
 import com.tracko.automaticchickendoor.util.FarmLiteUtil
 import com.tracko.automaticchickendoor.util.SharedPreferencesHelper
 import com.tracko.automaticchickendoor.viewmodel.BleViewModel
@@ -27,14 +29,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ScanBLEActivity : AppCompatActivity() {
-    
     @Inject
     lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private lateinit var binding: ActivityScanBleactivityBinding
     private val bleViewModel: BleViewModel by viewModels()
-    private lateinit var wifiCredentialDialog: AlertDialog
+    private lateinit var setUpDialog: AlertDialog
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    
     private val enableBluetoothLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -47,7 +47,6 @@ class ScanBLEActivity : AppCompatActivity() {
             binding.switchBluetooth.isChecked = false
         }
     }
-    
     private val bluetoothReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == BluetoothAdapter.ACTION_STATE_CHANGED) {
@@ -65,7 +64,7 @@ class ScanBLEActivity : AppCompatActivity() {
         setContentView(binding.root)
         
         if (FarmLiteUtil.hasBluetoothPermissions(this)) {
-           // FarmLiteUtil.checkAndEnableBluetooth(this)
+            // FarmLiteUtil.checkAndEnableBluetooth(this)
         } else {
             FarmLiteUtil.requestBluetoothPermissions(this)
         }
@@ -73,10 +72,13 @@ class ScanBLEActivity : AppCompatActivity() {
         initUiAndListeners()
     }
     
+    @SuppressLint("MissingPermission")
     private fun initUiAndListeners() {
         // --- Bluetooth switch handling ---
         binding.switchBluetooth.isChecked = bluetoothAdapter?.isEnabled == true
-        
+        binding.ivBackBtn.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         binding.switchBluetooth.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 if (bluetoothAdapter?.isEnabled == false) {
@@ -88,7 +90,6 @@ class ScanBLEActivity : AppCompatActivity() {
                 bleViewModel.stopScanning()
             }
         }
-        
         // --- Existing BLE logic ---
         bleViewModel.startScanning()
         
@@ -100,52 +101,40 @@ class ScanBLEActivity : AppCompatActivity() {
                 binding.rvBleDevices.apply {
                     layoutManager = LinearLayoutManager(this@ScanBLEActivity)
                     adapter = BleDeviceAdapter(devices) { device ->
-                        showCustomDialog(device)
+                        showSetupDialog(device)
                     }
                 }
             }
         }
-        
-        bleViewModel.credentialsSet.observe(this) {
-            if (::wifiCredentialDialog.isInitialized) {
-                wifiCredentialDialog.dismiss()
-                if (it.first) {
-                    val intent = Intent(this, DeviceDetailActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Not able to connect to device",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
     }
     
-    private fun showCustomDialog(device: BluetoothDevice) {
-        val dialogViewBinding = WifiCredentialsPopupBinding.inflate(layoutInflater)
+    private fun showSetupDialog(device: BluetoothDevice) {
+        val dialogViewBinding = DeviceConnectionSuccessDialogBinding.inflate(layoutInflater)
         
-        wifiCredentialDialog = MaterialAlertDialogBuilder(this)
+        setUpDialog = MaterialAlertDialogBuilder(this)
             .setView(dialogViewBinding.root)
             .setCancelable(true)
             .create()
         
-        dialogViewBinding.btnSetCredentials.setOnClickListener {
-            val ssid = dialogViewBinding.etSsid.text.toString()
-            val password = dialogViewBinding.etPassword.text.toString()
-            if (ssid.isEmpty()) {
-                dialogViewBinding.ssidTextField.error = "Enter wifi ssid"
-            } else if (password.isEmpty()) {
-                dialogViewBinding.passwordTextField.error = "Enter wifi password"
-            } else {
-                bleViewModel.connectToDevice(device, ssid, password)
-            }
+        dialogViewBinding.btnSetupWifi.setOnClickListener {
+            bleViewModel.setBleDevice(device)
+            loadConfigureWifiFragment()
         }
-        wifiCredentialDialog.show()
+        dialogViewBinding.btnSkipSetup.setOnClickListener {
+            val intent = Intent(this, DeviceDetailActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        setUpDialog.show()
     }
-    
+    private fun loadConfigureWifiFragment() {
+        // Load ConfigureWifiFragment in the container
+        val fragment = ConfigureWifiFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

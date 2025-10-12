@@ -24,13 +24,12 @@ import javax.inject.Singleton
 @Singleton
 class BleRepository @Inject constructor(private val context: Context) {
     
-
     private val bluetoothAdapter: BluetoothAdapter? by lazy {
         val bluetoothManager =
             context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothManager.adapter
     }
-    private var connectedBleDevice: BluetoothDevice? = null
+    var connectedBleDevice: BluetoothDevice? = null
     private val _devicesList = MutableLiveData<List<BluetoothDevice>>()
     val devicesList: LiveData<List<BluetoothDevice>> get() = _devicesList
 

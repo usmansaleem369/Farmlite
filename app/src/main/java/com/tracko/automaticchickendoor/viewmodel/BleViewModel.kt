@@ -19,6 +19,8 @@ class BleViewModel @Inject constructor(
     val readMacAddress = bleRepository.readMacAddress
     val isDoorCommandSentByBle = bleRepository.isDoorCommandSentByBle
     val isModeSetByBle = bleRepository.isModeSetByBle
+    
+    var selectedBleDevice = bleRepository.connectedBleDevice
     fun startScanning() {
         bleRepository.startScanning()
 
@@ -27,14 +29,18 @@ class BleViewModel @Inject constructor(
     fun stopScanning() {
         bleRepository.stopScanning()
     }
+    
+    fun setBleDevice(device: BluetoothDevice) {
+        bleRepository.connectedBleDevice = device
+    }
 
     fun connectToDevice(device: BluetoothDevice, ssid: String, password: String) {
         bleRepository.connectToDevice(device, ssid, password)
     }
 
-    fun writeWifiCredentials(ssid: String, password: String) {
-        //  repository.sendWifiCredentials(ssid,password)
-    }
+   /* fun writeWifiCredentials(ssid: String, password: String) {
+        bleRepository.sendWifiCredentials(ssid,password)
+    }*/
 
     fun sendDoorCommand(command: String){
         bleRepository.sendDoorCommand(command)

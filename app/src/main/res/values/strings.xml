@@ -95,4 +95,15 @@
     <string name="bluetooth">Bluetooth</string>
     <string name="via_bluetooth">via Bluetooth.</string>
     <string name="nearby_devices">Nearby Devices</string>
+    <string name="device_connected">Device Connected!</string>
+    <string name="let_s_set_up_wi_fi_to_keep_it_nonline">Let’s set up Wi-Fi to keep it\nonline.</string>
+    <string name="continue_to_wifi_setup">Continue to WiFi Setup</string>
+    <string name="wi_fi_setup">Wi-Fi Setup</string>
+    <string name="wi_fi">Wi-Fi</string>
+    <string name="set_up_wi_fi">Set Up Wi-Fi</string>
+    <string name="wi_fi_name">Wi-Fi Name</string>
+    <string name="connect">Connect</string>
+    <string name="wi_fi_connected">Wi-Fi Connected!</string>
+    <string name="you_re_all_set_now_program_nyour_door_or_check_its_nstatus">You’re all set. Now program\nyour door or check its\nstatus.</string>
+    <string name="_continue">Continue</string>
 </resources>

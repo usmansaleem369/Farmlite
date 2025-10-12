@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/verification_complete"
+        android:text="@string/device_connected"
         android:textColor="@color/black"
         android:textSize="@dimen/_18ssp"
         android:fontFamily="@font/manrope_extrabold"
@@ -30,21 +30,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/verification_success"
+        android:text="@string/let_s_set_up_wi_fi_to_keep_it_nonline"
         android:textColor="@color/black_with_opacity"
         android:textSize="@dimen/_12ssp"
         android:gravity="center"
         android:fontFamily="@font/manrope_regular" />
     <Button
-        android:id="@+id/btnConfirm"
-        android:layout_width="match_parent"
+        android:id="@+id/btnSetupWifi"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="Confirm"
-        android:fontFamily="@font/manrope_semibold"
+        android:text="@string/continue_to_wifi_setup"
         android:backgroundTint="@color/text_color_orange"
         android:textColor="@android:color/white"
+        android:fontFamily="@font/manrope_semibold"
+        app:cornerRadius="@dimen/_10sdp"/>
+    <Button
+        android:id="@+id/btnSkipSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/continue_to_wifi_setup"
+        android:backgroundTint="#E7E7E7"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="@color/text_color_orange"
         app:cornerRadius="@dimen/_10sdp"/>
 
 </LinearLayout>

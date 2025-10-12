@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.amplifyframework.api.graphql.GraphQLRequest
+import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.DevicesTable
 import com.tracko.automaticchickendoor.databinding.ActivityMainBinding
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
      
         initUiAndListeners()
         //Not in initUiAndListeners function to match functionality
-       getDevicesByEmail("usman.saleem369@gmail.com")
+       getDevicesByEmail("kamrans124@gmail.com")
        /* sharedPreferencesHelper.chickenDoorDevices?.let {
             binding.rvBluetooth.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
@@ -43,24 +45,31 @@ class MainActivity : AppCompatActivity() {
     }
     
     fun getDevicesByEmail(email: String) {
-        Amplify.DataStore.query(
-            DevicesTable::class.java,
-            DevicesTable.EMAIL.eq(email),
-            { matches ->
-                val deviceList = mutableListOf<DevicesTable>()
-                while (matches.hasNext()) {
-                    val device = matches.next()
-                    deviceList.add(device)
-                    Log.i("Amplify", "Device found: ${device.deviceName} (${device.macAddress})")
-                }
-                
-                if (deviceList.isEmpty()) {
-                    Log.i("Amplify", "No devices found for email: $email")
+        Log.i("Amplify", "Querying devices for email: $email")
+        
+        // Use list() because get() only retrieves a single record by ID.
+        Amplify.API.query(
+            ModelQuery.list(
+                DevicesTable::class.java,
+                DevicesTable.EMAIL.eq(email) // <-- filter by Email field
+            ),
+            { response ->
+                if (response.hasData()) {
+                    val devices = response.data.items.toList()
+                    if (devices.isEmpty()) {
+                        Log.i("Amplify", "No devices found for $email")
+                    } else {
+                        devices.forEach {
+                            Log.i(
+                                "Amplify",
+                                "Device found: ${it.deviceName} (${it.macAddress})"
+                            )
+                        }
+                        Log.i("Amplify", "Total devices: ${devices.size}")
+                    }
                 } else {
-                    Log.i("Amplify", "Found ${deviceList.size} devices for $email")
+                    Log.i("Amplify", "No data found for $email")
                 }
-                
-                // You can now post deviceList to LiveData, RecyclerView, etc.
             },
             { error ->
                 Log.e("Amplify", "Query failed", error)

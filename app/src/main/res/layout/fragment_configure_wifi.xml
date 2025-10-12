@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:paddingTop="@dimen/_30sdp"
+    tools:context=".ui.ConfigureWifiFragment">
+
+
+    <ImageView
+        android:id="@+id/ivBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ivBackBtn"
+        app:layout_constraintBottom_toBottomOf="@id/ivBackBtn"
+        android:text="@string/wi_fi_setup"
+        android:gravity="center"
+        android:textSize="@dimen/_14ssp"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="@color/text_color_black"/>
+
+    <TextView
+        android:id="@+id/tvInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ivBackBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/searching_for_nearby_devices"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="#090909"
+        android:textSize="@dimen/_18ssp"/>
+
+    <LinearLayout
+        android:id="@+id/llBleConfig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:background="@drawable/ble_rounded_bg"
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvInformation">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect with WiFi"
+            android:fontFamily="@font/manrope_bold"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect your FarmLite device\nwith WiFi"
+            android:fontFamily="@font/manrope_medium"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:gravity="center"
+            android:textColor="#180525"
+            android:textSize="@dimen/_10ssp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wi_fi"
+                android:id="@+id/title"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/manrope_semibold" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/title"
+                app:trackTint="@color/text_color_orange"
+                app:thumbTint="@color/white"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableStartCompat="@drawable/ic_wifi_2"
+        app:layout_constraintTop_toBottomOf="@id/llBleConfig"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/set_up_wi_fi"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/manrope_semibold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilWifiName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+        app:boxCornerRadiusTopStart="@dimen/_10sdp"
+        app:boxStrokeColor="@color/text_color_orange"
+        app:boxStrokeWidth="@dimen/_1sdp"
+        android:background="#0FE48831"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etWifiName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:drawableEnd="@drawable/ic_wifi_3"
+            android:hint="@string/wi_fi_name"
+            android:textSize="@dimen/_12ssp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilWifiPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+        app:boxCornerRadiusTopStart="@dimen/_10sdp"
+        app:boxStrokeColor="@color/text_color_orange"
+        app:boxStrokeWidth="@dimen/_1sdp"
+        android:background="#0FE48831"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilWifiName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etWifiPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:drawableEnd="@drawable/ic_lock"
+            android:hint="@string/password"
+            android:textSize="@dimen/_12ssp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/connect"
+        android:backgroundTint="@color/text_color_orange"
+        android:textColor="@android:color/white"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:fontFamily="@font/manrope_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="@dimen/_10sdp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
