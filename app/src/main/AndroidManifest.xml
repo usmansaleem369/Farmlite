@@ -38,7 +38,7 @@
             android:name=".ui.SetScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DeviceDetailActivity"
+            android:name=".ui.ProgramDoorActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SignInActivity"

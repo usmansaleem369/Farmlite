@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
      
         initUiAndListeners()
         //Not in initUiAndListeners function to match functionality
-       getDevicesByEmail("kamrans124@gmail.com")
+       getDevicesByEmail(sharedPreferencesHelper.email?:"")
        /* sharedPreferencesHelper.chickenDoorDevices?.let {
             binding.rvBluetooth.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)

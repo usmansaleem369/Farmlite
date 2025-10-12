@@ -46,8 +46,11 @@ class BleRepository @Inject constructor(private val context: Context) {
     private val _credentialsStatus = MutableLiveData<Pair<Boolean, BluetoothDevice?>>()
     val credentialsStatus: LiveData<Pair<Boolean, BluetoothDevice?>> get() = _credentialsStatus
     
-    private val _readMacAddress = MutableLiveData<String>()
-    val readMacAddress: LiveData<String> get() = _readMacAddress
+    private val _isDeviceConnected = MutableLiveData<Boolean>()
+    val isDeviceConnected : LiveData<Boolean> get() = _isDeviceConnected
+    
+    private val _readMacAddress = MutableLiveData<String?>()
+    val readMacAddress: LiveData<String?> get() = _readMacAddress
     
     var doorCommand : String = ""
     private val _isDoorCommandSentByBle = MutableLiveData<DoorCommandResultLocal>()
@@ -99,9 +102,17 @@ class BleRepository @Inject constructor(private val context: Context) {
     }
 
     @SuppressLint("MissingPermission")
-    fun connectToDevice(device: BluetoothDevice, ssid: String, password: String) {
+    fun connectAndSetCredentials(device: BluetoothDevice, ssid: String, password: String) {
         this.ssid = ssid
         this.password = password
+        connectedBleDevice = device
+        bluetoothGatt = device.connectGatt(context, false, gattCallback)
+    }
+    
+    @SuppressLint("MissingPermission")
+    fun connectToDevice(device: BluetoothDevice) {
+        this.ssid = null
+        this.password = null
         connectedBleDevice = device
         bluetoothGatt = device.connectGatt(context, false, gattCallback)
     }
@@ -123,7 +134,7 @@ class BleRepository @Inject constructor(private val context: Context) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 val ssid = this@BleRepository.ssid
                 val password = this@BleRepository.password
-                
+                _isDeviceConnected.postValue(true)
                 if (ssid != null && password != null) {
                     sendWifiCredentials(gatt, ssid, password)
                 } else {
@@ -266,6 +277,7 @@ class BleRepository @Inject constructor(private val context: Context) {
             }
         } else {
             Log.e("BLE", "Service with UUID $SERVICE_UUID not found")
+            _readMacAddress.postValue(null)
         }
     }
     

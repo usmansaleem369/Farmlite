@@ -10,17 +10,22 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amplifyframework.api.graphql.model.ModelMutation
+import com.amplifyframework.core.Amplify
+import com.amplifyframework.datastore.generated.model.DevicesTable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tracko.automaticchickendoor.R
 import com.tracko.automaticchickendoor.adapters.BleDeviceAdapter
 import com.tracko.automaticchickendoor.databinding.ActivityScanBleactivityBinding
 import com.tracko.automaticchickendoor.databinding.DeviceConnectionSuccessDialogBinding
+import com.tracko.automaticchickendoor.models.local.DeviceMacInfo
 import com.tracko.automaticchickendoor.util.FarmLiteUtil
 import com.tracko.automaticchickendoor.util.SharedPreferencesHelper
 import com.tracko.automaticchickendoor.viewmodel.BleViewModel
@@ -70,7 +75,54 @@ class ScanBLEActivity : AppCompatActivity() {
         }
         
         initUiAndListeners()
+        
+        observeViewModel()
     }
+    
+    private fun observeViewModel() {
+        bleViewModel.isDeviceConnected.observe(this) {
+            if (it) {
+                showSetupDialog()
+            } else {
+                Toast.makeText(this@ScanBLEActivity, "Not able to connect toi device. Try Again", Toast.LENGTH_SHORT).show()
+            }
+        }
+        
+        bleViewModel.readMacAddress.observe(this) {
+            it?.let {mac->
+               addDeviceToAWS(mac)
+            }?:run {
+                Toast.makeText(this@ScanBLEActivity, "Not a valid FarmLite Device. Try Again", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun addDeviceToAWS(mac:String) {
+        val model = DevicesTable.builder()
+            .deviceName("My Device")
+            .macAddress(mac)
+            .status("Online")
+            .email(sharedPreferencesHelper.email?:"")
+            .build()
+        
+        Amplify.API.mutate(
+            ModelMutation.create(model),
+            { response ->
+                if (response.hasErrors()) {
+                    Log.e("Amplify", "Failed to add device: ${response.errors}")
+                } else {
+                    val intent = Intent(this, ProgramDoorActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    
+                    Log.i("Amplify", "Device added successfully: ${response.data.id}")
+                }
+            },
+            { error ->
+                Log.e("Amplify", "Error adding device", error)
+            }
+        )
+    }
+    
     
     @SuppressLint("MissingPermission")
     private fun initUiAndListeners() {
@@ -101,40 +153,41 @@ class ScanBLEActivity : AppCompatActivity() {
                 binding.rvBleDevices.apply {
                     layoutManager = LinearLayoutManager(this@ScanBLEActivity)
                     adapter = BleDeviceAdapter(devices) { device ->
-                        showSetupDialog(device)
+                        bleViewModel.setBleDevice(device)
+                        bleViewModel.connectToDevice(device)
                     }
                 }
             }
         }
     }
     
-    private fun showSetupDialog(device: BluetoothDevice) {
+    private fun showSetupDialog() {
         val dialogViewBinding = DeviceConnectionSuccessDialogBinding.inflate(layoutInflater)
         
         setUpDialog = MaterialAlertDialogBuilder(this)
             .setView(dialogViewBinding.root)
             .setCancelable(true)
             .create()
-        
         dialogViewBinding.btnSetupWifi.setOnClickListener {
-            bleViewModel.setBleDevice(device)
             loadConfigureWifiFragment()
         }
         dialogViewBinding.btnSkipSetup.setOnClickListener {
-            val intent = Intent(this, DeviceDetailActivity::class.java)
-            startActivity(intent)
-            finish()
+           
+            bleViewModel.readMacAddress()
         }
         setUpDialog.show()
     }
+    
     private fun loadConfigureWifiFragment() {
         // Load ConfigureWifiFragment in the container
+        binding.fragmentContainer.visibility = View.VISIBLE
         val fragment = ConfigureWifiFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(null)
             .commit()
     }
+    
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

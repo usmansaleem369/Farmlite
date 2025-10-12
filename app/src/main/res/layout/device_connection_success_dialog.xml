@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="@string/continue_to_wifi_setup"
+        android:text="Skip Wi-Fi Setup"
         android:backgroundTint="#E7E7E7"
         android:fontFamily="@font/manrope_semibold"
         android:textColor="@color/text_color_orange"

@@ -13,7 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tracko.automaticchickendoor.R
-import com.tracko.automaticchickendoor.databinding.ActivityDeviceDetailBinding
+import com.tracko.automaticchickendoor.databinding.ActivityProgramDoorBinding
 import com.tracko.automaticchickendoor.models.local.DeviceMacInfo
 import com.tracko.automaticchickendoor.models.request.DoorOpenCloseRequest
 import com.tracko.automaticchickendoor.util.SharedPreferencesHelper
@@ -23,28 +23,27 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DeviceDetailActivity : AppCompatActivity() {
+class ProgramDoorActivity : AppCompatActivity() {
     @Inject
     lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private val bleViewModel: BleViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
-    private lateinit var binding: ActivityDeviceDetailBinding
+    private lateinit var binding: ActivityProgramDoorBinding
     private var animationDrawable: AnimationDrawable? = null
     private var animatedImageDrawable: AnimatedImageDrawable? = null
     private var espMac: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDeviceDetailBinding.inflate(layoutInflater)
+        binding = ActivityProgramDoorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUiAndListeners()
         observeViewModel()
-        bleViewModel.readMacAddress()
     }
     
     private fun initUiAndListeners() {
         binding.tvDeviceStatus.apply {
             text = "Online"
-            background = ContextCompat.getDrawable(this@DeviceDetailActivity,R.drawable.textview_filled_online_rounded_bg)
+            background = ContextCompat.getDrawable(this@ProgramDoorActivity,R.drawable.textview_filled_online_rounded_bg)
         }
         if (sharedPreferencesHelper.isOpen) {
             binding.tvCurrentStatus.text = getString(R.string.open)
@@ -60,7 +59,7 @@ class DeviceDetailActivity : AppCompatActivity() {
         
         
         binding.btnSetSchedule.setOnClickListener {
-            val intent = Intent(this@DeviceDetailActivity, SetScheduleActivity::class.java)
+            val intent = Intent(this@ProgramDoorActivity, SetScheduleActivity::class.java)
             startActivity(intent)
         }
         
@@ -92,7 +91,7 @@ class DeviceDetailActivity : AppCompatActivity() {
                 }
             } else {
                 bleViewModel.sendDoorCommand(it.message)
-                Toast.makeText(this@DeviceDetailActivity,"No internet connection. Trying with BLE", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProgramDoorActivity,"No internet connection. Trying with BLE", Toast.LENGTH_SHORT).show()
             }
         }
         
@@ -111,10 +110,10 @@ class DeviceDetailActivity : AppCompatActivity() {
                     }
                 }
             }  else {
-                Toast.makeText(this@DeviceDetailActivity,"Device not connected. Please connect via BLE and try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ProgramDoorActivity,"Device not connected. Please connect via BLE and try again", Toast.LENGTH_SHORT).show()
             }
         }
-        bleViewModel.readMacAddress.observe(this) {
+        /*bleViewModel.readMacAddress.observe(this) {
             it?.let {mac->
                 espMac = mac
                 val bleMac = bleViewModel.credentialsSet.value?.second?.address?:""
@@ -122,7 +121,7 @@ class DeviceDetailActivity : AppCompatActivity() {
                 val device = DeviceMacInfo(name = bleName, bleMac = bleMac, espMac = espMac)
                 addChickenDoorDevice(device)
             }
-        }
+        }*/
     }
     
     fun addChickenDoorDevice(newDevice: DeviceMacInfo) {

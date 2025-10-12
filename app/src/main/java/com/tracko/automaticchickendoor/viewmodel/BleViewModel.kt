@@ -16,6 +16,7 @@ class BleViewModel @Inject constructor(
 
     val devicesList: LiveData<List<BluetoothDevice>> = bleRepository.devicesList
     val credentialsSet = bleRepository.credentialsStatus
+    val isDeviceConnected = bleRepository.isDeviceConnected
     val readMacAddress = bleRepository.readMacAddress
     val isDoorCommandSentByBle = bleRepository.isDoorCommandSentByBle
     val isModeSetByBle = bleRepository.isModeSetByBle
@@ -34,8 +35,12 @@ class BleViewModel @Inject constructor(
         bleRepository.connectedBleDevice = device
     }
 
-    fun connectToDevice(device: BluetoothDevice, ssid: String, password: String) {
-        bleRepository.connectToDevice(device, ssid, password)
+    fun connectToDevice(device: BluetoothDevice) {
+        bleRepository.connectToDevice(device)
+    }
+    
+    fun connectAndSetCredentials(device: BluetoothDevice, ssid: String, password: String) {
+        bleRepository.connectAndSetCredentials(device,ssid,password)
     }
 
    /* fun writeWifiCredentials(ssid: String, password: String) {
