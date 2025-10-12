@@ -6,14 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.core.Amplify
-import com.amplifyframework.datastore.generated.model.Device
-import com.tracko.automaticchickendoor.R
-import com.tracko.automaticchickendoor.adapters.DevicesListAdapter
+import com.amplifyframework.datastore.generated.model.DevicesTable
 import com.tracko.automaticchickendoor.databinding.ActivityMainBinding
 import com.tracko.automaticchickendoor.util.FarmLiteUtil
 import com.tracko.automaticchickendoor.util.SharedPreferencesHelper
@@ -50,10 +44,10 @@ class MainActivity : AppCompatActivity() {
     
     fun getDevicesByEmail(email: String) {
         Amplify.DataStore.query(
-            Device::class.java,
-            Device.EMAIL.eq(email),
+            DevicesTable::class.java,
+            DevicesTable.EMAIL.eq(email),
             { matches ->
-                val deviceList = mutableListOf<Device>()
+                val deviceList = mutableListOf<DevicesTable>()
                 while (matches.hasNext()) {
                     val device = matches.next()
                     deviceList.add(device)

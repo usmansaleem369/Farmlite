@@ -9,7 +9,10 @@ import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
+import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.ModelOperation;
+import com.amplifyframework.core.model.annotations.AuthRule;
 import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
@@ -17,25 +20,24 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Device type in your schema. */
+/** This is an auto generated class representing the DevicesTable type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Devices", type = Model.Type.USER, version = 1)
-@Index(name = "undefined", fields = {"id"})
-public final class Device implements Model {
-  public static final QueryField ID = field("Device", "id");
-  public static final QueryField DEVICE_NAME = field("Device", "DeviceName");
-  public static final QueryField EMAIL = field("Device", "Email");
-  public static final QueryField MAC_ADDRESS = field("Device", "MacAddress");
-  public static final QueryField STATUS = field("Device", "Status");
-  public static final QueryField CREATED_AT = field("Device", "createdAt");
-  public static final QueryField UPDATED_AT = field("Device", "updatedAt");
+@ModelConfig(pluralName = "DevicesTables", type = Model.Type.USER, version = 1, authRules = {
+  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+})
+public final class DevicesTable implements Model {
+  public static final QueryField ID = field("DevicesTable", "id");
+  public static final QueryField DEVICE_NAME = field("DevicesTable", "DeviceName");
+  public static final QueryField MAC_ADDRESS = field("DevicesTable", "MacAddress");
+  public static final QueryField STATUS = field("DevicesTable", "Status");
+  public static final QueryField EMAIL = field("DevicesTable", "Email");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String DeviceName;
-  private final @ModelField(targetType="String") String Email;
   private final @ModelField(targetType="String") String MacAddress;
   private final @ModelField(targetType="String") String Status;
-  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
-  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime updatedAt;
+  private final @ModelField(targetType="String") String Email;
+  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
+  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   /** @deprecated This API is internal to Amplify and should not be used. */
   @Deprecated
    public String resolveIdentifier() {
@@ -50,16 +52,16 @@ public final class Device implements Model {
       return DeviceName;
   }
   
-  public String getEmail() {
-      return Email;
-  }
-  
   public String getMacAddress() {
       return MacAddress;
   }
   
   public String getStatus() {
       return Status;
+  }
+  
+  public String getEmail() {
+      return Email;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -70,14 +72,12 @@ public final class Device implements Model {
       return updatedAt;
   }
   
-  private Device(String id, String DeviceName, String Email, String MacAddress, String Status, Temporal.DateTime createdAt, Temporal.DateTime updatedAt) {
+  private DevicesTable(String id, String DeviceName, String MacAddress, String Status, String Email) {
     this.id = id;
     this.DeviceName = DeviceName;
-    this.Email = Email;
     this.MacAddress = MacAddress;
     this.Status = Status;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    this.Email = Email;
   }
   
   @Override
@@ -87,14 +87,14 @@ public final class Device implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Device device = (Device) obj;
-      return ObjectsCompat.equals(getId(), device.getId()) &&
-              ObjectsCompat.equals(getDeviceName(), device.getDeviceName()) &&
-              ObjectsCompat.equals(getEmail(), device.getEmail()) &&
-              ObjectsCompat.equals(getMacAddress(), device.getMacAddress()) &&
-              ObjectsCompat.equals(getStatus(), device.getStatus()) &&
-              ObjectsCompat.equals(getCreatedAt(), device.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), device.getUpdatedAt());
+      DevicesTable devicesTable = (DevicesTable) obj;
+      return ObjectsCompat.equals(getId(), devicesTable.getId()) &&
+              ObjectsCompat.equals(getDeviceName(), devicesTable.getDeviceName()) &&
+              ObjectsCompat.equals(getMacAddress(), devicesTable.getMacAddress()) &&
+              ObjectsCompat.equals(getStatus(), devicesTable.getStatus()) &&
+              ObjectsCompat.equals(getEmail(), devicesTable.getEmail()) &&
+              ObjectsCompat.equals(getCreatedAt(), devicesTable.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), devicesTable.getUpdatedAt());
       }
   }
   
@@ -103,9 +103,9 @@ public final class Device implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getDeviceName())
-      .append(getEmail())
       .append(getMacAddress())
       .append(getStatus())
+      .append(getEmail())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -115,12 +115,12 @@ public final class Device implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Device {")
+      .append("DevicesTable {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("DeviceName=" + String.valueOf(getDeviceName()) + ", ")
-      .append("Email=" + String.valueOf(getEmail()) + ", ")
       .append("MacAddress=" + String.valueOf(getMacAddress()) + ", ")
       .append("Status=" + String.valueOf(getStatus()) + ", ")
+      .append("Email=" + String.valueOf(getEmail()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -139,11 +139,9 @@ public final class Device implements Model {
    * @param id the id of the existing item this instance will represent
    * @return an instance of this model with only ID populated
    */
-  public static Device justId(String id) {
-    return new Device(
+  public static DevicesTable justId(String id) {
+    return new DevicesTable(
       id,
-      null,
-      null,
       null,
       null,
       null,
@@ -154,69 +152,53 @@ public final class Device implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       DeviceName,
-      Email,
       MacAddress,
       Status,
-      createdAt,
-      updatedAt);
+      Email);
   }
   public interface BuildStep {
-    Device build();
+    DevicesTable build();
     BuildStep id(String id);
     BuildStep deviceName(String deviceName);
-    BuildStep email(String email);
     BuildStep macAddress(String macAddress);
     BuildStep status(String status);
-    BuildStep createdAt(Temporal.DateTime createdAt);
-    BuildStep updatedAt(Temporal.DateTime updatedAt);
+    BuildStep email(String email);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
     private String DeviceName;
-    private String Email;
     private String MacAddress;
     private String Status;
-    private Temporal.DateTime createdAt;
-    private Temporal.DateTime updatedAt;
+    private String Email;
     public Builder() {
       
     }
     
-    private Builder(String id, String DeviceName, String Email, String MacAddress, String Status, Temporal.DateTime createdAt, Temporal.DateTime updatedAt) {
+    private Builder(String id, String DeviceName, String MacAddress, String Status, String Email) {
       this.id = id;
       this.DeviceName = DeviceName;
-      this.Email = Email;
       this.MacAddress = MacAddress;
       this.Status = Status;
-      this.createdAt = createdAt;
-      this.updatedAt = updatedAt;
+      this.Email = Email;
     }
     
     @Override
-     public Device build() {
+     public DevicesTable build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Device(
+        return new DevicesTable(
           id,
           DeviceName,
-          Email,
           MacAddress,
           Status,
-          createdAt,
-          updatedAt);
+          Email);
     }
     
     @Override
      public BuildStep deviceName(String deviceName) {
         this.DeviceName = deviceName;
-        return this;
-    }
-    
-    @Override
-     public BuildStep email(String email) {
-        this.Email = email;
         return this;
     }
     
@@ -233,14 +215,8 @@ public final class Device implements Model {
     }
     
     @Override
-     public BuildStep createdAt(Temporal.DateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-    
-    @Override
-     public BuildStep updatedAt(Temporal.DateTime updatedAt) {
-        this.updatedAt = updatedAt;
+     public BuildStep email(String email) {
+        this.Email = email;
         return this;
     }
     
@@ -256,19 +232,14 @@ public final class Device implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String deviceName, String email, String macAddress, String status, Temporal.DateTime createdAt, Temporal.DateTime updatedAt) {
-      super(id, DeviceName, Email, MacAddress, Status, createdAt, updatedAt);
+    private CopyOfBuilder(String id, String deviceName, String macAddress, String status, String email) {
+      super(id, DeviceName, MacAddress, Status, Email);
       
     }
     
     @Override
      public CopyOfBuilder deviceName(String deviceName) {
       return (CopyOfBuilder) super.deviceName(deviceName);
-    }
-    
-    @Override
-     public CopyOfBuilder email(String email) {
-      return (CopyOfBuilder) super.email(email);
     }
     
     @Override
@@ -282,20 +253,15 @@ public final class Device implements Model {
     }
     
     @Override
-     public CopyOfBuilder createdAt(Temporal.DateTime createdAt) {
-      return (CopyOfBuilder) super.createdAt(createdAt);
-    }
-    
-    @Override
-     public CopyOfBuilder updatedAt(Temporal.DateTime updatedAt) {
-      return (CopyOfBuilder) super.updatedAt(updatedAt);
+     public CopyOfBuilder email(String email) {
+      return (CopyOfBuilder) super.email(email);
     }
   }
   
 
-  public static class DeviceIdentifier extends ModelIdentifier<Device> {
+  public static class DevicesTableIdentifier extends ModelIdentifier<DevicesTable> {
     private static final long serialVersionUID = 1L;
-    public DeviceIdentifier(String id) {
+    public DevicesTableIdentifier(String id) {
       super(id);
     }
   }

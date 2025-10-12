@@ -1,6 +1,19 @@
 {
     "UserAgent": "aws-amplify-cli/2.0",
     "Version": "1.0",
+    "api": {
+        "plugins": {
+            "awsAPIPlugin": {
+                "ChickenCoopDoor": {
+                    "endpointType": "GraphQL",
+                    "endpoint": "https://keiodu36engcdhmqwa5xrx7oqa.appsync-api.eu-north-1.amazonaws.com/graphql",
+                    "region": "eu-north-1",
+                    "authorizationType": "API_KEY",
+                    "apiKey": "da2-wzpwonfjozbppbqvqvhjfabgme"
+                }
+            }
+        }
+    },
     "auth": {
         "plugins": {
             "awsCognitoAuthPlugin": {
@@ -8,6 +21,21 @@
                 "Version": "0.1.0",
                 "IdentityManager": {
                     "Default": {}
+                },
+                "AppSync": {
+                    "Default": {
+                        "ApiUrl": "https://keiodu36engcdhmqwa5xrx7oqa.appsync-api.eu-north-1.amazonaws.com/graphql",
+                        "Region": "eu-north-1",
+                        "AuthMode": "API_KEY",
+                        "ApiKey": "da2-wzpwonfjozbppbqvqvhjfabgme",
+                        "ClientDatabasePrefix": "ChickenCoopDoor_API_KEY"
+                    },
+                    "ChickenCoopDoor_AWS_IAM": {
+                        "ApiUrl": "https://keiodu36engcdhmqwa5xrx7oqa.appsync-api.eu-north-1.amazonaws.com/graphql",
+                        "Region": "eu-north-1",
+                        "AuthMode": "AWS_IAM",
+                        "ClientDatabasePrefix": "ChickenCoopDoor_AWS_IAM"
+                    }
                 },
                 "CredentialsProvider": {
                     "CognitoIdentity": {

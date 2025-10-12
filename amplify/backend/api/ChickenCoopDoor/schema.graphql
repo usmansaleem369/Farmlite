@@ -1,0 +1,18 @@
+type SchedulesModes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Email: String
+  MacAddress: String
+  Mode_LT: String
+  Mode_LL: String
+  Mode_TL: String
+  Mode_TT: String
+}
+
+type DevicesTable @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  DeviceName: String
+  MacAddress: String
+  Status: String
+  Email: String
+}
+ 

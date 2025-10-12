@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chickencoopdoor-staging-03411-authRole",
+      "UnauthRoleArn": "arn:aws:iam::590184131023:role/amplify-chickencoopdoor-staging-03411-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::590184131023:role/amplify-chickencoopdoor-staging-03411-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-chickencoopdoor-staging-03411-deployment",
+      "UnauthRoleName": "amplify-chickencoopdoor-staging-03411-unauthRole",
+      "StackName": "amplify-chickencoopdoor-staging-03411",
+      "StackId": "arn:aws:cloudformation:eu-north-1:590184131023:stack/amplify-chickencoopdoor-staging-03411/47230f10-d7e4-11ef-8821-0e2fca35393d",
+      "AmplifyAppId": "d2uuqpy57tj5mo"
+    },
+    "categories": {
+      "auth": {
+        "chickencoopdoor9a25d5c2": {}
+      }
+    }
+  }
+}
